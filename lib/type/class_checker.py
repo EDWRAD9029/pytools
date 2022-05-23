@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May 19 16:58:41 2022
 
-@author: nomut
 """
 import class_path
 
