@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu May 19 10:55:04 2022
-a
-@author: nomut
+
 """
 
 import sys,os
