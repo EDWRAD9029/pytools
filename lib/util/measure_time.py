@@ -86,9 +86,29 @@ class Timer():
     複数行にまたがる処理時間を計測する
     """
     def __init__(self):
+        self.time = []
         self.time_start = None
         self.time_finish = None
-        self.timer_mode = None
+        self.timer_mode()
+    
+    def timer_mode(self,func=time.process_time):
+        self.timer_func = func
     
     def start(self):
+        print("------------------------ 時間計測　開始 ------------------------")
+        self.time_start = self.timer_func()
+        self.time.append(self.time_start)
+    
+    def finish(self):
+        self.time_finish = self.timer_func()
+        self.time.append(self.time_finish)
+        elapsed_time = self.time_finish - self.time_start
+        print("------------------------ 時間計測　終了 ------------------------")
+        print("elapsed_time :", "{:.3f}".format(elapsed_time),"sec")
+        return elapsed_time
+    
+    def lap(self):
+        self.time.append(self.timer_func())
+    
+    def print_times(self):
         pass
