@@ -2,8 +2,9 @@
 """
 
 """
-import time
+import time,timeit
 import numpy as np
+import math
 
 def print_process_time(f):
     """
@@ -42,6 +43,70 @@ def print_process_time(f):
         return return_val
  
     return print_process_time_func
+
+def print_process_time_detail(f):
+    """
+    計測デコレータ
+    CPU使用時間を精密に計測する
+    
+    使用例：
+    import measure_time
+    @measure_time.print_process_time_detail
+    def _sample():
+        // 計測されるコード
+    """
+    def print_process_time_detail_func(*args, **kwargs):
+        # 設定
+        time_max = 10 # 合計の時間(秒)
+        loops_max = 1000000 # 繰り返し計算する場合の最大ループ回数
+        
+        # 引数表示
+        print("CPU使用時間を精密に計測します...")
+        print("args   :",args)
+        print("kwargs :",kwargs)
+        
+        # 開始
+        print("------------------------ 時間計測　開始 ------------------------")
+        start_time = time.process_time()
+ 
+        # 関数実行
+        return_val = f(*args, **kwargs)
+ 
+        # 終了
+        end_time = time.process_time()
+ 
+        # 関数名と経過時間を出力(秒)
+        elapsed_time = end_time - start_time
+        print("function     :", f.__name__)
+        if time_max < elapsed_time:
+            print("elapsed_time :", "{:.3f}".format(elapsed_time),"sec")
+            print("loop = 1")
+        else:
+            try:
+                N = math.ceil(time_max / elapsed_time)
+                if N > loops_max:
+                    N = loops_max
+            except ZeroDivisionError:
+                N = loops_max
+            times = []
+            for i in range(N):
+                tmp = time.process_time()
+                return_val = f(*args, **kwargs)
+                times.append(time.process_time() - tmp)
+            elapsed_time = np.average(times)
+            print("elapsed_time :")
+            print("\t loop :",N)
+            print("\t average :", "{}".format(np.average(times)),"sec")
+            print("\t std :", "{}".format(np.std(times)),"sec")
+            print("\t min :", "{}".format(np.min(times)),"sec")
+            print("\t max :", "{}".format(np.max(times)),"sec")
+        
+        print("------------------------ 時間計測　終了 ------------------------")
+        
+        # 戻り値を返す
+        return return_val
+ 
+    return print_process_time_detail_func
 
 
 def print_performance_time(f):
@@ -88,10 +153,11 @@ class Timer():
     """
     def __init__(self):
         self.clear()
-        self.timer_mode()
+        self.set_timer_mode()
     
-    def timer_mode(self,func=time.perf_counter):
+    def set_timer_mode(self,func=time.perf_counter):
         self.timer_func = func
+        print("計測関数は",self.timer_func,"です")
     
     def start(self):
         print("------------------------ 時間計測　開始 ------------------------")
