@@ -1,4 +1,4 @@
-SET ENV=flask
+SET ENV=django
 rem 文字コードの変更(UTF8に)
 chcp 65001
 
@@ -18,18 +18,15 @@ echo 環境作成
 call conda create -y -n %ENV%
 echo;
 
-timeout 3
 
 echo 仮想環境%ENV%へ切り替え
 call activate %ENV%
 echo;
 
-timeout 3
 
-echo インストール：flask
-call conda install -y flask
-call conda install -y flask-sqlalchemy
-call conda install -y flask-wtf
+echo インストール：django
+call conda install -y -c conda-forge django
+
 
 echo 処理が終了しました
 cmd /k
