@@ -1,5 +1,5 @@
 # pytools
-## pythonの様々なライブラリを使いやすいようにしたライブラリです（編集中）。
+## pythonの様々なライブラリを使いやすいようにしたライブラリです（編集中）。spyderでの実行を想定しています。
 
 ## 前準備
 ### 1. Anacondaをインストールする。
@@ -25,4 +25,6 @@ Macの場合は"mac_create"が含まれたファイルを実行する。
 |ファイル名|Windows|Mac|説明|注意点|
 |:--:|:--:|:--:|:--:|:--:|
 |python_win_create_env_tensorflowCpu260.bat|〇||tensorflow、OpenCVの使用を目的とした仮想環境||
-|python_win_create_env_flask.bat|〇||flaskの使用を目的とした仮想環境||
+|python_win_create_env_flask.bat|〇||flaskの使用を目的とした仮想環境|flaskはコマンドプロンプトで実行するため、spyderでは実行できない|
+|python_win_create_env_django.bat|〇||djangoの使用を目的とした仮想環境|djangoはコマンドプロンプトで実行するため、spyderでは実行できない|
+|python_mac_create_env_flask.command||〇|flaskの使用を目的とした仮想環境|flaskはターミナルで実行するため、spyderでは実行できない|
