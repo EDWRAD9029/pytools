@@ -39,10 +39,11 @@ Windowsの場合は"win_create"が含まれたファイルを管理者として�
 
 Macの場合は"mac_create"が含まれたファイルを実行する。
 
-各ファイルは以下のライブラリを使うことを目的としている。必要な環境を構築する。すべて実行しても良い。
+各ファイルは以下のライブラリを使うことを目的としている。必要な環境を構築する。すべて実行しても良い。迷ったら、"all"を構築する。
 
 |ファイル名|Windows|Mac|説明|注意点|
 |:--:|:--:|:--:|:--:|:--:|
+|python_win_create_env_all.bat|〇||ほとんどの事ができる仮想環境||
 |python_win_create_env_tensorflowCpu260.bat|〇||tensorflow、OpenCVの使用を目的とした仮想環境||
 |python_win_create_env_flask.bat|〇||flaskの使用を目的とした仮想環境|flaskはコマンドプロンプトで実行するため、spyderでは実行できない|
 |python_win_create_env_django.bat|〇||djangoの使用を目的とした仮想環境|djangoはコマンドプロンプトで実行するため、spyderでは実行できない|
@@ -65,6 +66,7 @@ Macの場合は"mac_exe"が含まれたファイルを実行する。
 
 |ファイル名|Windows|Mac|説明|注意点|
 |:--:|:--:|:--:|:--:|:--:|
+|python_win_exe_all.bat|〇||ほとんどの事ができる仮想環境||
 |python_win_exe_tensorflowCpu260.bat|〇||tensorflow、OpenCVの使用を目的とした仮想環境||
 |python_win_exe_flask.bat|〇||flaskの使用を目的とした仮想環境|flaskはコマンドプロンプトで実行するため、spyderでは実行できない|
 |python_win_exe_django.bat|〇||djangoの使用を目的とした仮想環境|djangoはコマンドプロンプトで実行するため、spyderでは実行できない、編集中|
