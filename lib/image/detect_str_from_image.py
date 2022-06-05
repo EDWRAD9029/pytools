@@ -6,7 +6,7 @@
 from PIL import Image
 import pyocr
 
-class detect_str_from_image():
+class detector_str_from_image():
     """
     画像から文字列を検出するクラス。
     
