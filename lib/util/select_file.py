@@ -20,8 +20,9 @@ class selector_files():
     
     select_file_csv : CSVファイルを選択すると、そのファイルの絶対参照パスを返す
     
-    select_file_image : 画像ァイルを選択すると、そのファイルの絶対参照パスを返す
+    select_file_image : 画像ファイルを選択すると、そのファイルの絶対参照パスを返す
     
+    select_file_movie : 動画ファイルを選択すると、そのファイルの絶対参照パスを返す
     """
     
     
@@ -141,3 +142,49 @@ class selector_files():
                                  ("TARGAファイル",prefix+'.tga')]
         #データを選択する
         return self.select_file(filetypes=image_filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
+    
+    
+    
+    def select_file_movie(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+        """
+        動画ファイルを選択する。
+    
+        パラメータ
+        ----------
+        data_dir : str
+            最初に開くディレクトリ。
+            デフォルトは __file__。
+        
+        fig_title : str
+            ファイル選択ウインドウのタイトル名。
+            デフォルトは ''。
+        
+        prefix : str
+            ファイル名。指定しない場合はファイル名で候補がしぼられない。
+            "*"を使用することで部分検索が可能。
+            デフォルトは '*'。
+            例："*_log"とすると、ファイル名の最後が"_log"のファイルのみ選択できる。
+        
+        multiple : bool
+            ファイルの複数選択を許可するか。trueは許可。
+            デフォルトは False。
+    
+        返り値
+        -------
+        file_name : str
+            ファイルの絶対参照パス。
+        
+    
+        """
+        #動画ファイル拡張子
+        movie_filetypes: list = [("AVIファイル",prefix+'.avi'),
+                                 ("MPEG4ファイル",prefix+'.mp4'),
+                                 ("MOVファイル",prefix+'.mov'),
+                                 ("WMVファイル",prefix+'.wmv'),
+                                 ("MPEG2ファイル",prefix+'.mpg'),
+                                 ("MKVファイル",prefix+'.mkv'),
+                                 ("FLVファイル",prefix+'.flv'),
+                                 ("ASFファイル",prefix+'.asf'),
+                                 ("VOBファイル",prefix+'.vob')]
+        #データを選択する
+        return self.select_file(filetypes=movie_filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
