@@ -6,6 +6,49 @@ import time,timeit
 import numpy as np
 import math
 
+def print_time_time(f):
+    """
+    計測デコレータ
+    経過時間を計測する
+    
+    詳細：
+    time.time関数を用いて時間を計測し、小数3桁まで表示する
+    
+    使用例：
+    import measure_time
+    @measure_time.print_time_time
+    def _sample():
+        // 計測されるコード
+    """
+    def print_time_time_func(*args, **kwargs):
+        # 引数表示
+        print("経過時間を計測します...")
+        print("args   :",args)
+        print("kwargs :",kwargs)
+        
+        # 開始
+        print("------------------------ 時間計測　開始 ------------------------")
+        start_time = time.time()
+ 
+        # 関数実行
+        return_val = f(*args, **kwargs)
+ 
+        # 終了
+        end_time = time.time()
+        print("------------------------ 時間計測　終了 ------------------------")
+ 
+        # 関数名と経過時間を出力(秒)
+        elapsed_time = end_time - start_time
+        print("function     :", f.__name__)
+        print("elapsed_time :", "{:.3f}".format(elapsed_time),"sec")
+ 
+        # 戻り値を返す
+        return return_val
+ 
+    return print_time_time_func
+
+
+
 def print_process_time(f):
     """
     計測デコレータ
@@ -46,6 +89,8 @@ def print_process_time(f):
         return return_val
  
     return print_process_time_func
+
+
 
 def print_process_time_detail(f):
     """
@@ -117,6 +162,7 @@ def print_process_time_detail(f):
     return print_process_time_detail_func
 
 
+
 def print_performance_time(f):
     """
     計測デコレータ
@@ -157,6 +203,8 @@ def print_performance_time(f):
         return return_val
  
     return print_performance_time_func
+
+
 
 def print_performance_time_detail(f):
     """
@@ -227,6 +275,8 @@ def print_performance_time_detail(f):
  
     return print_performance_time_detail_func
 
+
+
 class Timer():
     """
     時間を計測するクラス。
@@ -253,6 +303,8 @@ class Timer():
         self.clear()
         self.set_timer_mode()
     
+    
+    
     def set_timer_mode(self,func=time.perf_counter):
         """
         時間計測を行う関数を設定する。
@@ -271,6 +323,8 @@ class Timer():
         self.timer_func = func
         print("計測関数は",self.timer_func,"です")
     
+    
+    
     def start(self):
         """
         時間計測を開始する。
@@ -288,6 +342,8 @@ class Timer():
         print("------------------------ 時間計測　開始 ------------------------")
         self.time_start = self.timer_func()
         self.times.append(self.time_start)
+    
+    
     
     def finish(self):
         """
@@ -311,6 +367,8 @@ class Timer():
         print("elapsed_time :", "{:.3f}".format(elapsed_time),"sec")
         return elapsed_time
     
+    
+    
     def lap(self):
         """
         lapタイムとしてtimesに記録する。
@@ -325,6 +383,8 @@ class Timer():
 
         """
         self.times.append(self.timer_func())
+    
+    
     
     def print_times(self):
         """
@@ -346,6 +406,8 @@ class Timer():
         for i,j in enumerate(np.diff(np.array(self.times))):
             print("time"+str(i),"-","time"+str(i+1),":","{:.3f}".format(j),"sec")
         return [np.diff(np.array(self.times))]
+    
+    
     
     def clear(self):
         self.times = []
