@@ -20,6 +20,25 @@ class Colors():
         self.mode = "RGB"
     
     def set_color(self,color=None,mode="RGB"):
+        """
+        色情報を設定する
+    
+        パラメータ
+        ----------
+        color : list
+            色情報。
+            RGBでは[R,G,B]で指定。
+        
+        mode : str
+            色情報の形式。
+            デフォルトは "RGB"。
+    
+        返り値
+        -------
+        None
+        
+    
+        """
         self.mode = mode
         self.color = color
     
