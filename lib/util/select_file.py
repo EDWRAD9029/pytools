@@ -25,14 +25,31 @@ class selector_files():
     select_file_movie : 動画ファイルを選択すると、そのファイルの絶対参照パスを返す
     """
     
-    
+    filetypes_base = [("ファイル",'*')]
+    filetypes_csv = [("CSVファイル",'.csv')]
+    filetypes_image = [("PNGファイル",'.png'),
+                       ("JPGファイル",['.jpg','.jpeg']),
+                       ("GIFファイル",'.jif'),
+                       ("Photoshopファイル",'.psd'),
+                       ("TIFFファイル",['.tif','.tiff']),
+                       ("ビットマップファイル",'.bmp'),
+                       ("TARGAファイル",'.tga')]
+    filetypes_movie = [("AVIファイル",'.avi'),
+                       ("MPEG4ファイル",'.mp4'),
+                       ("MOVファイル",'.mov'),
+                       ("WMVファイル",'.wmv'),
+                       ("MPEG2ファイル",'.mpg'),
+                       ("MKVファイル",'.mkv'),
+                       ("FLVファイル",'.flv'),
+                       ("ASFファイル",'.asf'),
+                       ("VOBファイル",'.vob')]
     
     def __init__(self):
         pass
     
     
     
-    def select_file(self,filetypes=[("ファイル",'*')],data_dir=__file__,fig_title='',multiple=False):
+    def select_file(self,filetypes=filetypes_base,data_dir=__file__,fig_title='',multiple=False):
         """
         ファイルを選択する。
     
@@ -64,7 +81,7 @@ class selector_files():
     
     
     
-    def select_file_csv(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+    def select_file_csv(self,filetypes=filetypes_csv,data_dir=__file__,fig_title='',prefix='*',multiple=False):
         """
         CSVファイルを選択する。
     
@@ -94,14 +111,14 @@ class selector_files():
             ファイルの絶対参照パス。
         
         """
-        #csvのファイル拡張子
-        csv_filetypes: list = [("CSVファイル",prefix+'.csv')]
-        #データを選択する
-        return self.select_file(filetypes=csv_filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
+        # 拡張子にprefixをつなげる
+        filetypes = [(i[0],[prefix+j for j in i[1]]) if type(i[1])==list else (i[0],prefix+i[1]) for i in filetypes]
+        # データを選択する
+        return self.select_file(filetypes=filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
     
     
     
-    def select_file_image(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+    def select_file_image(self,filetypes=filetypes_image,data_dir=__file__,fig_title='',prefix='*',multiple=False):
         """
         画像ファイルを選択する。
     
@@ -132,20 +149,14 @@ class selector_files():
         
     
         """
-        #画像ファイル拡張子
-        image_filetypes: list = [("PNGファイル",prefix+'.png'),
-                                 ("JPGファイル",[prefix+'.jpg',prefix+'.jpeg']),
-                                 ("GIFファイル",prefix+'.jif'),
-                                 ("Photoshopファイル",prefix+'.psd'),
-                                 ("TIFFファイル",[prefix+'.tif',prefix+'.tiff']),
-                                 ("ビットマップファイル",prefix+'.bmp'),
-                                 ("TARGAファイル",prefix+'.tga')]
-        #データを選択する
-        return self.select_file(filetypes=image_filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
+        # 拡張子にprefixをつなげる
+        filetypes = [(i[0],[prefix+j for j in i[1]]) if type(i[1])==list else (i[0],prefix+i[1]) for i in filetypes]
+        # データを選択する
+        return self.select_file(filetypes=filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
     
     
     
-    def select_file_movie(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+    def select_file_movie(self,filetypes=filetypes_movie,data_dir=__file__,fig_title='',prefix='*',multiple=False):
         """
         動画ファイルを選択する。
     
@@ -176,15 +187,7 @@ class selector_files():
         
     
         """
-        #動画ファイル拡張子
-        movie_filetypes: list = [("AVIファイル",prefix+'.avi'),
-                                 ("MPEG4ファイル",prefix+'.mp4'),
-                                 ("MOVファイル",prefix+'.mov'),
-                                 ("WMVファイル",prefix+'.wmv'),
-                                 ("MPEG2ファイル",prefix+'.mpg'),
-                                 ("MKVファイル",prefix+'.mkv'),
-                                 ("FLVファイル",prefix+'.flv'),
-                                 ("ASFファイル",prefix+'.asf'),
-                                 ("VOBファイル",prefix+'.vob')]
-        #データを選択する
-        return self.select_file(filetypes=movie_filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
+        # 拡張子にprefixをつなげる
+        filetypes = [(i[0],[prefix+j for j in i[1]]) if type(i[1])==list else (i[0],prefix+i[1]) for i in filetypes]
+        # データを選択する
+        return self.select_file(filetypes=filetypes,data_dir=data_dir,fig_title=fig_title,multiple=False)
