@@ -25,31 +25,53 @@ class selector_files():
     select_file_movie : 動画ファイルを選択すると、そのファイルの絶対参照パスを返す
     """
     
-    filetypes_base = [("ファイル",'*')]
-    filetypes_csv = [("CSVファイル",'.csv')]
-    filetypes_image = [("PNGファイル",'.png'),
-                       ("JPGファイル",['.jpg','.jpeg']),
-                       ("GIFファイル",'.jif'),
-                       ("Photoshopファイル",'.psd'),
-                       ("TIFFファイル",['.tif','.tiff']),
-                       ("ビットマップファイル",'.bmp'),
-                       ("TARGAファイル",'.tga')]
-    filetypes_movie = [("AVIファイル",'.avi'),
-                       ("MPEG4ファイル",'.mp4'),
-                       ("MOVファイル",'.mov'),
-                       ("WMVファイル",'.wmv'),
-                       ("MPEG2ファイル",'.mpg'),
-                       ("MKVファイル",'.mkv'),
-                       ("FLVファイル",'.flv'),
-                       ("ASFファイル",'.asf'),
-                       ("VOBファイル",'.vob')]
+    
     
     def __init__(self):
         pass
     
     
     
-    def select_file(self,filetypes=filetypes_base,data_dir=__file__,fig_title='',multiple=False):
+    def get_filetype(self,filetype="base"):
+        """
+        ファイルの種類を指定することで、ファイル拡張子を取得する。
+    
+        パラメータ
+        ----------
+        filetype : str
+            ファイルのタイプ。
+            デフォルトは "base"。
+        
+        返り値
+        -------
+        filetypes : list
+            ファイル拡張子。
+            デフォルトは [("ファイル",'*')]。
+        
+        """
+        filetypes = {"base":[("ファイル",'*')],
+                     "csv":[("CSVファイル",'.csv')],
+                     "image":[("PNGファイル",'.png'),
+                              ("JPGファイル",['.jpg','.jpeg']),
+                              ("GIFファイル",'.jif'),
+                              ("Photoshopファイル",'.psd'),
+                              ("TIFFファイル",['.tif','.tiff']),
+                              ("ビットマップファイル",'.bmp'),
+                              ("TARGAファイル",'.tga')],
+                     "movie":[("AVIファイル",'.avi'),
+                              ("MPEG4ファイル",'.mp4'),
+                              ("MOVファイル",'.mov'),
+                              ("WMVファイル",'.wmv'),
+                              ("MPEG2ファイル",'.mpg'),
+                              ("MKVファイル",'.mkv'),
+                              ("FLVファイル",'.flv'),
+                              ("ASFファイル",'.asf'),
+                              ("VOBファイル",'.vob')]}
+        return filetypes[filetype]
+    
+    
+    
+    def select_file(self,data_dir=__file__,fig_title='',multiple=False):
         """
         ファイルを選択する。
     
@@ -77,11 +99,12 @@ class selector_files():
             ファイルの絶対参照パス。
         
         """
+        filetypes = self.get_filetype("base")
         return dialog.askopenfilename(filetypes = filetypes,initialdir = data_dir,title = fig_title)
     
     
     
-    def select_file_csv(self,filetypes=filetypes_csv,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+    def select_file_csv(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
         """
         CSVファイルを選択する。
     
@@ -111,6 +134,7 @@ class selector_files():
             ファイルの絶対参照パス。
         
         """
+        filetypes = self.get_filetype("csv")
         # 拡張子にprefixをつなげる
         filetypes = [(i[0],[prefix+j for j in i[1]]) if type(i[1])==list else (i[0],prefix+i[1]) for i in filetypes]
         # データを選択する
@@ -118,7 +142,7 @@ class selector_files():
     
     
     
-    def select_file_image(self,filetypes=filetypes_image,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+    def select_file_image(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
         """
         画像ファイルを選択する。
     
@@ -149,6 +173,7 @@ class selector_files():
         
     
         """
+        filetypes = self.get_filetype("image")
         # 拡張子にprefixをつなげる
         filetypes = [(i[0],[prefix+j for j in i[1]]) if type(i[1])==list else (i[0],prefix+i[1]) for i in filetypes]
         # データを選択する
@@ -156,7 +181,7 @@ class selector_files():
     
     
     
-    def select_file_movie(self,filetypes=filetypes_movie,data_dir=__file__,fig_title='',prefix='*',multiple=False):
+    def select_file_movie(self,data_dir=__file__,fig_title='',prefix='*',multiple=False):
         """
         動画ファイルを選択する。
     
@@ -187,6 +212,7 @@ class selector_files():
         
     
         """
+        filetypes = self.get_filetype("movie")
         # 拡張子にprefixをつなげる
         filetypes = [(i[0],[prefix+j for j in i[1]]) if type(i[1])==list else (i[0],prefix+i[1]) for i in filetypes]
         # データを選択する
