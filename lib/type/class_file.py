@@ -5,6 +5,8 @@
 
 from .util import select_file
 
+
+
 class Files():
     """
     ファイル情報のクラス。
@@ -24,6 +26,8 @@ class Files():
     def __init__(self):
         pass
     
+    def __str__(self):
+        return self.filepath
     
     
     def set_dir(self,new_path=None):
