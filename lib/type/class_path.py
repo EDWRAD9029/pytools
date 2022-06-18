@@ -29,6 +29,9 @@ class Paths():
         # pathが設定されていない場合は環境構築用の名前空間を読み込む
         self.set_path_pytools()
     
+    def __str__(self):
+        return self.data
+    
     def set_path_pytools(self):
         tmp = __file__.split("\\")
         s = [i=="pytools" for i in tmp]
