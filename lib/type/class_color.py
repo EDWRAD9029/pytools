@@ -10,6 +10,9 @@ class Colors():
     パラメータ
     ----------
     mode : str
+    color : list
+        色情報。
+        RGBでは[R,G,B]で指定。
     
     メソッド
     ----------
@@ -18,6 +21,9 @@ class Colors():
     """
     def __init__(self):
         self.mode = "RGB"
+    
+    def __str__(self):
+        return self.color
     
     def set_color(self,color=None,mode="RGB"):
         """
